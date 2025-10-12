@@ -28,5 +28,22 @@
     "constructs": "^10.4.2",
     "express": "^5.1.0",
     "luxon": "^3.7.2"
-  }
+  },
+  "description": "Este proyecto utiliza AWS CDK para desplegar una función Lambda empaquetada como contenedor Docker en ECR (Elastic Container Registry)",
+  "main": "jest.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lauraperezal10/Fechas-habiles-lambda.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lauraperezal10/Fechas-habiles-lambda/issues"
+  },
+  "homepage": "https://github.com/Lauraperezal10/Fechas-habiles-lambda#readme"
 }
