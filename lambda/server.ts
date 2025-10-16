@@ -74,18 +74,21 @@ app.get(
     let fechaInicio: DateTime = DateTime.now().setZone('America/Bogota');
 
     if (date) {
-      const fechaParsed: DateTime = DateTime.fromISO(date, { setZone: true });
+    // Requiere formato completo: YYYY-MM-DDTHH:MM[:ss[.fff]]Z o +00:00
+    const fullDateTimeUtcRegex:RegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(Z|(\+00:00))$/;
 
-      if (!fechaParsed.isValid || fechaParsed.offset !== 0) {
-        res.status(400).json({
-          error: 'InvalidParameters',
-          message: 'Formato de fecha inválido. Debe ser ISO 8601 en UTC (terminado en Z o con +00:00).'
-        });
-        return;
-      }
+    const fechaParsed: DateTime = DateTime.fromISO(date, { setZone: true });
 
-      fechaInicio = fechaParsed.setZone('America/Bogota');
+    if (!fullDateTimeUtcRegex.test(date) || !fechaParsed.isValid || fechaParsed.offset !== 0) {
+      res.status(400).json({
+        error: 'InvalidParameters',
+        message: 'Formato de fecha inválido. Debe ser ISO 8601 en UTC (ej.: 2025-08-01T14:00:00Z o con +00:00).'
+      });
+      return;
     }
+
+  fechaInicio = fechaParsed.setZone('America/Bogota');
+}
 
     await obtenerDiasFestivos();
 
